@@ -108,6 +108,7 @@ plot_convergence(results, save_path='figures/convergence_curves.png')
 
 ## 📝 Citation
 
+```python
 @article{yourname2026epang,
   title={EPANG-Gen: Enhanced Physics-Aware Natural Gradient with Generalization},
   author={Your Name and Co-authors},
@@ -116,7 +117,7 @@ plot_convergence(results, save_path='figures/convergence_curves.png')
   volume={xx},
   pages={1-24}
 }
-
+```
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
