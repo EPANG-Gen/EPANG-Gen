@@ -87,8 +87,9 @@ python -m epang_gen.experiments.run_experiment --config configs/default.yaml
 Option 2: Use Colab Notebook
 
 Open and run: https://img.shields.io/badge/Colab-Open-yellow
+
 Option 3: Quick Test
-bash
+
 
 # Run quick test (2 minutes)
 python examples/compare_optimizers.py --quick
