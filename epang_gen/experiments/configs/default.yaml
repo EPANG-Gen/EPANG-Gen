@@ -1,0 +1,32 @@
+# Default configuration for EPANG-Gen experiments
+
+# Optimizers to test
+optimizers:
+  - Adam
+  - ADOPT
+  - EPANG-Gen
+  - AdamW
+  - EPANG-Gen-light
+  - L-BFGS
+
+# Problems to solve
+problems:
+  - poisson_1d
+  - burgers
+  - darcy_2d
+  - helmholtz_2d
+
+# Random seeds for reproducibility
+seeds: [42, 43, 44]
+
+# Training parameters
+epochs: 5000
+lr: 0.001
+beta1: 0.9
+beta2: 0.999
+eps: 1e-8
+
+# EPANG-Gen specific parameters
+rank: 10
+eigen_update_freq: 100
+history_size: 10  # for L-BFGS
