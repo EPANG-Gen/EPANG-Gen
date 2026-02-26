@@ -42,3 +42,36 @@ pip install -r requirements.txt
 
 # Install package in development mode
 pip install -e .
+
+
+### Basic Usage
+```python
+import torch
+from epang_gen.optimizers import EPANGGen
+from epang_gen.models import BayesianPINN
+from epang_gen.problems import poisson_1d_loss
+
+# Create model and optimizer
+model = BayesianPINN(layers=[1, 50, 50, 1])
+optimizer = EPANGGen(model.parameters(), lr=1e-3, rank=10)
+
+# Generate data
+x_colloc = torch.rand(1000, 1) * 2 - 1
+x_bc = torch.tensor([[-1.0], [1.0]])
+u_bc = torch.tensor([[0.0], [0.0]])
+
+# Training loop
+for epoch in range(1000):
+    def closure():
+        optimizer.zero_grad()
+        loss = poisson_1d_loss(model, x_colloc, x_bc, u_bc)
+        loss.backward()
+        return loss.item()
+    
+    loss = optimizer.step(closure)
+    if epoch % 100 == 0:
+        print(f"Epoch {epoch}: loss = {loss:.6f}")
+```
+
+
+
