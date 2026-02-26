@@ -75,3 +75,125 @@ for epoch in range(1000):
 
 
 
+## 📈 Reproducing Paper Results
+
+Option 1: Run Full Experiment (Recommended)
+
+```python
+# Run all 72 configurations (takes ~4-5 hours on T4 GPU)
+python -m epang_gen.experiments.run_experiment --config configs/default.yaml
+```
+
+Option 2: Use Colab Notebook
+
+Open and run: https://img.shields.io/badge/Colab-Open-yellow
+Option 3: Quick Test
+bash
+
+# Run quick test (2 minutes)
+python examples/compare_optimizers.py --quick
+
+## 📊 Visualization Examples
+
+```python
+from epang_gen.utils.visualization import plot_convergence, plot_final_comparison
+
+# Load results
+results = load_results('results/experiment_results.json')
+
+# Generate publication-quality figures
+plot_final_comparison(results, save_path='figures/final_comparison.png')
+plot_convergence(results, save_path='figures/convergence_curves.png')
+```
+
+## 📝 Citation
+
+@article{yourname2026epang,
+  title={EPANG-Gen: Enhanced Physics-Aware Natural Gradient with Generalization},
+  author={Your Name and Co-authors},
+  journal={Journal of Machine Learning Research},
+  year={2026},
+  volume={xx},
+  pages={1-24}
+}
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 🙏 Acknowledgments
+
+    Thanks to the ADOPT authors for their NeurIPS 2024 paper
+
+    Built with PyTorch and scientific Python ecosystem
+
+
+---
+
+### **2. `setup.py`**
+```python
+"""
+Setup script for EPANG-Gen package.
+"""
+
+from setuptools import setup, find_packages
+import os
+
+# Read long description from README
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
+# Read requirements
+with open("requirements.txt", "r", encoding="utf-8") as f:
+    requirements = f.read().splitlines()
+
+setup(
+    name="epang-gen",
+    version="1.0.0",
+    author="Your Name",
+    author_email="your.email@example.com",
+    description="Enhanced Physics-Aware Natural Gradient with Generalization",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/yourusername/EPANG-Gen",
+    project_urls={
+        "Bug Tracker": "https://github.com/yourusername/EPANG-Gen/issues",
+        "Documentation": "https://github.com/yourusername/EPANG-Gen/docs",
+        "Source Code": "https://github.com/yourusername/EPANG-Gen",
+    },
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+        "Topic :: Scientific/Engineering :: Mathematics",
+        "Topic :: Scientific/Engineering :: Physics",
+        "Intended Audience :: Science/Research",
+    ],
+    packages=find_packages(exclude=["tests", "notebooks", "examples"]),
+    python_requires=">=3.8",
+    install_requires=requirements,
+    extras_require={
+        "dev": [
+            "pytest>=7.0.0",
+            "pytest-cov>=4.0.0",
+            "black>=22.0.0",
+            "isort>=5.0.0",
+            "flake8>=5.0.0",
+        ],
+        "notebooks": [
+            "jupyter>=1.0.0",
+            "ipykernel>=6.0.0",
+        ],
+    },
+    include_package_data=True,
+    zip_safe=False,
+)
+```
