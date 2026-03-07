@@ -1,0 +1,41 @@
+# Default configuration for benchmarks
+
+experiment:
+  optimizers: ['Adam', 'ADOPT', 'EPANG-Gen', 'AdamW', 'EPANG-Gen-light', 'L-BFGS']
+  problems: ['poisson_1d', 'burgers', 'darcy_2d', 'helmholtz_2d']
+  seeds: [42, 43, 44]
+
+optimizers:
+  lr: 0.001
+
+epang:
+  initial_rank: 10
+  eigen_update_freq: 100
+
+adamw:
+  weight_decay: 0.01
+
+lbfgs:
+  history_size: 10
+
+# Problem-specific settings
+poisson_1d:
+  layers: [1, 50, 50, 1]
+  epochs: 5000
+
+burgers:
+  layers: [2, 100, 100, 100, 1]
+  epochs: 5000
+
+darcy_2d:
+  layers: [2, 100, 100, 100, 1]
+  epochs: 5000
+
+helmholtz_2d:
+  layers: [2, 100, 100, 100, 1]
+  epochs: 5000
+
+taylor_green:
+  layers: [4, 80, 80, 80, 4]
+  epochs: 2000
+  reynolds: 100000
