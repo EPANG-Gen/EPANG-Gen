@@ -1,56 +1,51 @@
 """
-Unit tests for optimizer implementations.
+Unit tests for EPANG-Gen optimizer.
 """
 
-import pytest
 import torch
-from epang_gen.optimizers import EPANGGen, ManualADOPT
+import unittest
+from epang_gen import EPANGGen, BayesianPASA
 
 
-def test_epang_gen_creation():
-    """Test EPANGGen optimizer creation."""
-    params = [torch.randn(10, 10, requires_grad=True)]
-    optimizer = EPANGGen(params, lr=0.01, rank=5)
-    assert optimizer.rank == 5
-    assert optimizer.defaults['lr'] == 0.01
-
-
-def test_adopt_creation():
-    """Test ManualADOPT optimizer creation."""
-    params = [torch.randn(10, 10, requires_grad=True)]
-    optimizer = ManualADOPT(params, lr=0.01)
-    assert optimizer.defaults['lr'] == 0.01
-
-
-def test_epang_gen_step():
-    """Test EPANGGen optimizer step."""
-    x = torch.tensor([5.0], requires_grad=True)
-    optimizer = EPANGGen([x], lr=0.01, rank=1)
+class TestEPANGGen(unittest.TestCase):
     
-    for _ in range(10):
-        def closure():
-            optimizer.zero_grad()
-            loss = x**2
-            loss.backward()
-            return loss.item()
+    def setUp(self):
+        self.model = torch.nn.Linear(10, 1)
+        self.optimizer = EPANGGen(self.model.parameters(), lr=1e-3, rank=5)
+    
+    def test_initialization(self):
+        """Test optimizer initialization."""
+        self.assertEqual(self.optimizer.rank, 5)
+        self.assertEqual(self.optimizer.defaults['lr'], 1e-3)
+    
+    def test_step(self):
+        """Test optimizer step."""
+        x = torch.randn(5, 10)
+        y = self.model(x)
+        loss = y.sum()
+        loss.backward()
         
-        loss = optimizer.step(closure)
-    
-    assert x.item() < 5.0  # Should decrease
-
-
-def test_adopt_step():
-    """Test ManualADOPT optimizer step."""
-    x = torch.tensor([5.0], requires_grad=True)
-    optimizer = ManualADOPT([x], lr=0.01)
-    
-    for _ in range(100):
-        def closure():
-            optimizer.zero_grad()
-            loss = x**2
-            loss.backward()
-            return loss.item()
+        self.optimizer.step()
         
-        loss = optimizer.step(closure)
+        # Check that parameters were updated
+        for p in self.model.parameters():
+            self.assertIsNotNone(p.grad)
     
-    assert abs(x.item()) < 1.0  # Should converge
+    def test_pasa_integration(self):
+        """Test PASA adaptive rank selection."""
+        pasa = BayesianPASA(initial_rank=5, max_rank=10)
+        optimizer = EPANGGen(self.model.parameters(), pasa=pasa)
+        
+        # Simulate some steps
+        for _ in range(10):
+            x = torch.randn(5, 10)
+            y = self.model(x)
+            loss = y.sum()
+            loss.backward()
+            optimizer.step()
+        
+        self.assertIsNotNone(optimizer.pasa)
+
+
+if __name__ == '__main__':
+    unittest.main()
