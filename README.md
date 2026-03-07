@@ -17,7 +17,7 @@ EPANG-Gen is the first optimizer specifically designed for geometric and physica
 
 ## 🔬 Key Results
 
-|   Benchmark                 | Adam       | EPANG-Gen  | ADOPT          |
+|          Benchmark          |    Adam    |  EPANG-Gen |     ADOPT      |
 | --------------------------- |------------|----------- |----------------|
 | Poisson 1D                  | 10.71      | 45.39      | 8.91 (25% NaN) |
 | Burgers                     | 0.15       | 0.51       | 0.33 (25% NaN) |
