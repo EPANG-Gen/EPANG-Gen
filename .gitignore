@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# PyTorch
+*.pt
+*.pth
+*.pkl
+
+# Results
+experiments/results/*.json
+experiments/results/*.npy
+experiments/results/*.pkl
+!experiments/results/README.md
+
+# Figures
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+!paper/*.pdf
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Distributions
+dist/
+build/
+*.egg-info/
+
+# Config
+*.yaml.bak
+*.yml.bak
+
+# Large files
+*.npy
+*.npz
+*.h5
+*.hdf5
