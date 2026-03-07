@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use EPANG-Gen in your research, please cite this paper."
+authors:
+  - family-names: "Mostafa"
+    given-names: "Mohsen"
+    email: "mohsen.mostafa@example.com"
+    affiliation: "AI Research"
+title: "EPANG-Gen: Enhanced Physics-Aware Natural Gradient with Generalization"
+version: 1.0.0
+date-released: 2026-02-28
+url: "https://github.com/EPANG-Gen/EPANG-Gen"
+repository-code: "https://github.com/EPANG-Gen/EPANG-Gen"
+license: "MIT"
+keywords:
+  - "optimizer"
+  - "PINNs"
+  - "scientific machine learning"
+  - "uncertainty quantification"
+  - "PDEs"
