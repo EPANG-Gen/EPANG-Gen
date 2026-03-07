@@ -1,34 +1,24 @@
 """
 EPANG-Gen: Enhanced Physics-Aware Natural Gradient with Generalization
-=======================================================================
 
-A novel optimizer combining eigenvalue-based preconditioning,
-Bayesian normalization, and physics-aware constraints for scientific
-machine learning and Physics-Informed Neural Networks (PINNs).
+A novel optimizer combining memory-efficient eigen-decomposition with
+Bayesian uncertainty quantification for scientific machine learning.
 """
 
-__version__ = "1.0.0"
+from .optimizer import EPANGGen
+from .normalization import BayesianRLayerNorm
+from .pasa import BayesianPASA
+from .models import BayesianPINN
+from .utils import set_seed, count_parameters
 
-from .optimizers import EPANGGen, ManualADOPT
-from .models import BayesianPINN, BayesianRLayerNorm, BayesianPASA
-from .problems import (
-    poisson_1d_loss,
-    burgers_loss,
-    darcy_2d_loss,
-    helmholtz_2d_loss,
-)
+__version__ = "1.0.0"
+__author__ = "Mohsen Mostafa"
 
 __all__ = [
-    # Optimizers
     "EPANGGen",
-    "ManualADOPT",
-    # Models
-    "BayesianPINN",
     "BayesianRLayerNorm",
     "BayesianPASA",
-    # Problems
-    "poisson_1d_loss",
-    "burgers_loss",
-    "darcy_2d_loss",
-    "helmholtz_2d_loss",
+    "BayesianPINN",
+    "set_seed",
+    "count_parameters",
 ]
